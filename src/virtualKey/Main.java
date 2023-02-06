@@ -48,7 +48,11 @@ public class Main {
 	}
 	
 	static void displayFileNames() {
-		File path = new File("../phase1_assignment_java");
+		System.out.println("Enter Absolute path :");
+		String Abspath = sc.nextLine();
+		Abspath+= sc.nextLine();
+//		File path = new File("../phase1_assignment_java");
+		File path = new File(Abspath);
 		
 		if(path.isDirectory()) {
 			System.out.println("----Directory Found, Displaying files from "+path.getAbsolutePath()+"----");
@@ -108,12 +112,16 @@ public class Main {
 	static void createFile() {
 		
 		while(true) {
-			System.out.println("Enter a new file name with file extenstion (q to exit): ");
-			String fname = sc.next();
-			if(fname.equals("q")) {
+			System.out.println("Enter an absloute Directory path where you want to create a new file (q to exit): ");
+			String absPath = sc.nextLine();
+			absPath+= sc.nextLine();
+			
+			if(absPath.equals("q")) {
 				break;
 			}else {
-				File newFile = new File(fname);
+				System.out.println("Enter a new file name with file extenstion");
+				String fname = sc.next();
+				File newFile = new File(absPath+"/"+fname);
 				
 				try {
 					if(newFile.createNewFile()) {
@@ -135,8 +143,9 @@ public class Main {
 	static void deleteFile() {
 			
 			while(true) {
-				System.out.println("Enter a file name with file extenstion (q to exit): ");
-				String fname = sc.next();
+				System.out.println("Enter a absolute file path with file extenstion (q to exit): ");
+				String fname = sc.nextLine();
+				fname+=sc.nextLine();
 				if(fname.equals("q")) {
 					break;
 				}else {
@@ -157,12 +166,15 @@ public class Main {
 	static void searchFile() {
 		
 		while(true) {
-			System.out.println("Enter a file name with file extenstion (q to exit): ");
-			String fname = sc.next();
-			if(fname.equals("q")) {
+			System.out.println("Enter an absolute directory Path where you want to search (q to exit): ");
+			String absPath = sc.nextLine();
+			absPath+= sc.nextLine();
+			if(absPath.equals("q")) {
 				break;
 			}else {
-				File path = new File("../phase1_assignment_java");
+				System.out.println("Enter File name to search: ");
+				String fname = sc.next();
+				File path = new File(absPath);
 				MyFilenameFilter filter = new MyFilenameFilter(fname);
 				String[] flist = path.list(filter);
 				if (flist == null) {
